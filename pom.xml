@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.iv4xr-project</groupId>
+    <artifactId>JLabGym</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.2</version>
+                <configuration>
+                    <source>10</source>
+                    <target>10</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+               <artifactId>maven-surefire-plugin</artifactId>
+               <version>2.22.2</version>
+            </plugin>
+            <plugin>
+               <artifactId>maven-failsafe-plugin</artifactId>
+               <version>2.22.2</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+         <!-- dependencies on JUnit-5 for unit testing -->
+         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.6.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.6.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>5.5.2</version>
+            <scope>test</scope>
+        </dependency>
+      -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
+        <!-- dependencies on iv4xr Agent Framework -->
+        <!--  for remote repo:
+        <dependency>
+            <groupId>com.github.iv4XR-project</groupId>
+            <artifactId>aplib</artifactId>
+            <version>v1.0</version>
+        </dependency>
+        -->
+        <dependency>
+            <!-- <groupId>nl.uu.cs.aplib</groupId> -->
+            <groupId>com.github.iv4xr-project</groupId>
+            <artifactId>aplib</artifactId>
+            <version>[1.2.1,)</version> <!--  at least version 1.2.1 -->
+        </dependency>
+    </dependencies>
+</project>

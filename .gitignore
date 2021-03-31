@@ -1,0 +1,8 @@
+/target/
+/gym/
+.DS_Store
+.project
+.classpath
+.settings/
+.idea/
+

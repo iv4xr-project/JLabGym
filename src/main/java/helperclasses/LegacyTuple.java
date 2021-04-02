@@ -1,12 +1,13 @@
 package helperclasses;
 
 /**
- * Representing a pair. We keep it to maintain compatibility with serialization/deserialization
- * towards the Lar Recruits (when we send data back and forth). 
+ * Representing a pair. We keep it to maintain compatibility with
+ * serialization/deserialization towards the Lar Recruits (when we send data
+ * back and forth).
  * 
  */
-public class LegacyTuple<T1,T2> {
-	public T1 object1;
+public class LegacyTuple<T1, T2> {
+    public T1 object1;
     public T2 object2;
 
     /**
@@ -19,8 +20,8 @@ public class LegacyTuple<T1,T2> {
     }
 
     /**
-     * Override the equals method.
-     * Equals should only be dependent on the variables that are stored in the Tuple.
+     * Override the equals method. Equals should only be dependent on the variables
+     * that are stored in the Tuple.
      *
      * @param o The other object.
      * @return Boolean whether the Tuples are equal.
@@ -33,8 +34,8 @@ public class LegacyTuple<T1,T2> {
     }
 
     /**
-     * Override the hash function
-     * hash(tuple(1,2)) should not be equal to hash(tuple(2,1)), so the second object is multiplied by 2.
+     * Override the hash function hash(tuple(1,2)) should not be equal to
+     * hash(tuple(2,1)), so the second object is multiplied by 2.
      *
      * @return hashCode of the Tuple
      */

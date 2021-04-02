@@ -11,9 +11,9 @@ import java.util.*;
 import java.util.function.Function;
 
 /**
- * This class was created to help with list operations and might be deleted later if we find a good library.
- * For now I've added the functions I use most while programming.
- * Last written by Maurin on 07-11-2019
+ * This class was created to help with list operations and might be deleted
+ * later if we find a good library. For now I've added the functions I use most
+ * while programming. Last written by Maurin on 07-11-2019
  */
 
 public class QArrayList<T> extends ArrayList<T> {
@@ -81,7 +81,8 @@ public class QArrayList<T> extends ArrayList<T> {
         // create a new list of type T
         QArrayList<A> selectedList = new QArrayList<A>();
 
-        // apply the mapping function on every value in the list and store it in the new list
+        // apply the mapping function on every value in the list and store it in the new
+        // list
         for (T value : this)
             selectedList.add(func.apply(value));
 
@@ -225,7 +226,7 @@ public class QArrayList<T> extends ArrayList<T> {
         return false;
     }
 
-     /**
+    /**
      * Reverses the list
      *
      * @return a reversed COPY of the original list
@@ -263,7 +264,7 @@ public class QArrayList<T> extends ArrayList<T> {
         }
 
         /*
-        The compare method just uses the compare method of A.
+         * The compare method just uses the compare method of A.
          */
         @Override
         public int compareTo(SortPair<A, E> pair) {

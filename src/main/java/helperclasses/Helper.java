@@ -10,12 +10,14 @@ package helperclasses;
 import java.util.Arrays;
 
 /**
- * This class contains helper functions that are not particularly tied to a package.
+ * This class contains helper functions that are not particularly tied to a
+ * package.
  */
 public class Helper {
 
     /**
-     * This function maps Integer[] to int[], since java cannot do this automatically.
+     * This function maps Integer[] to int[], since java cannot do this
+     * automatically.
      *
      * @param array of type Integer
      * @return array of type int
@@ -31,7 +33,6 @@ public class Helper {
     public static Integer[] toClassType(int[] array) {
         return Arrays.stream(array).boxed().toArray(Integer[]::new);
     }
-
 
     public static int[] primitive(QArrayList<Integer> array) {
         return primitive(array.toArray(new Integer[0]));

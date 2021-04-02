@@ -11,49 +11,47 @@ import world.LabRecruitsRawNavMesh;
 import world.Observation;
 
 /**
- * A wrapper for commands to be sent to the Lab Recruits. 
- * WP: This is a bit legacy, let's not change this.
+ * A wrapper for commands to be sent to the Lab Recruits. WP: This is a bit
+ * legacy, let's not change this.
  * 
- * Because it already contains an invoker and target which will be useful in multi agent environments
- * This Request class provides a little bit more utility that handles the casting for you for the ResponseType
+ * Because it already contains an invoker and target which will be useful in
+ * multi agent environments This Request class provides a little bit more
+ * utility that handles the casting for you for the ResponseType
+ * 
  * @author Maurin
  */
 
-public class Request<ResponseType>  {
-	
-	
-	/**
-	 * Keep this enum synced with Unity!
-	 */
-	public enum RequestType
-	{
-	    DISCONNECT,
-	    PAUSE,
-	    START,
-	    INIT,
-	    UPDATE_ENVIRONMENT,
-	    AGENTCOMMAND
-	}
+public class Request<ResponseType> {
 
     /**
-     * Java can not determine the class of ResponseType at runtime.
-     * In this case, storing an instance of Class<ResponseType> to cast the response object is seen as good practice.
+     * Keep this enum synced with Unity!
+     */
+    public enum RequestType {
+        DISCONNECT, PAUSE, START, INIT, UPDATE_ENVIRONMENT, AGENTCOMMAND
+    }
+
+    /**
+     * Java can not determine the class of ResponseType at runtime. In this case,
+     * storing an instance of Class<ResponseType> to cast the response object is
+     * seen as good practice.
      */
     public transient final Class<ResponseType> responseType;
 
     /**
-     * Specifying the type of the request to Lab Recruits, e.g. to initialize the game,
-     * or to send a command for an agent.
+     * Specifying the type of the request to Lab Recruits, e.g. to initialize the
+     * game, or to send a command for an agent.
      * 
-     * The name of the field, "cmd", is a bit misleading, because it does not hold the
-     * actual command for Lab Recruits agent, but rather just representing the request
-     * type. The actual command, if there is one, is embedded in the "arg" field.
+     * The name of the field, "cmd", is a bit misleading, because it does not hold
+     * the actual command for Lab Recruits agent, but rather just representing the
+     * request type. The actual command, if there is one, is embedded in the "arg"
+     * field.
      */
-    public RequestType cmd ;
-    
+    public RequestType cmd;
+
     /**
-     * The argument of the request. E.g. for INIT-request it will be a configuration parameters
-     * for Lab Recruits. For Agent-command request it will be the command name and parameters.
+     * The argument of the request. E.g. for INIT-request it will be a configuration
+     * parameters for Lab Recruits. For Agent-command request it will be the command
+     * name and parameters.
      */
     public Object arg;
 
@@ -81,6 +79,7 @@ public class Request<ResponseType>  {
 
     /**
      * Disconnect from Unity
+     * 
      * @return succes
      */
     public static Request<Boolean> disconnect() {
@@ -89,6 +88,7 @@ public class Request<ResponseType>  {
 
     /**
      * Press Pause in unity
+     * 
      * @return succes
      */
     public static Request<Boolean> pauseSimulation() {
@@ -97,6 +97,7 @@ public class Request<ResponseType>  {
 
     /**
      * Press play in Unity
+     * 
      * @return succes
      */
     public static Request<Boolean> startSimulation() {
@@ -104,9 +105,9 @@ public class Request<ResponseType>  {
     }
 
     /**
-     * Request the initialisation data from Unity:
-     * - Navmesh
-     * - Agent ID's along with their implementation type
+     * Request the initialisation data from Unity: - Navmesh - Agent ID's along with
+     * their implementation type
+     * 
      * @return GymInitialisation
      */
     public static Request<LabRecruitsRawNavMesh> gymEnvironmentInitialisation(LabRecruitsConfig config) {
@@ -123,7 +124,7 @@ public class Request<ResponseType>  {
     /**
      * Request an update on the hazards
      */
-    public static Request<Boolean> updateEnvironment(){
+    public static Request<Boolean> updateEnvironment() {
         return new Request<>(Boolean.class, RequestType.UPDATE_ENVIRONMENT);
     }
 }

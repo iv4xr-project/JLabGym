@@ -16,53 +16,59 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 /**
- * Contains method to launch the Lab Recruits game. The name "TestServer" is a bit misleading. We keep
- * it for a historical reason. This class itself is not a "server", but it launches the Lab Recruits 
- * game, which in turn has an open TCP port that let it to be controlled by an external agent. 
- * So, the game can be seen as a "server".
+ * Contains method to launch the Lab Recruits game. The name "TestServer" is a
+ * bit misleading. We keep it for a historical reason. This class itself is not
+ * a "server", but it launches the Lab Recruits game, which in turn has an open
+ * TCP port that let it to be controlled by an external agent. So, the game can
+ * be seen as a "server".
  */
 public class LabRecruitsTestServer {
 
     private Process server;
 
     /**
-     * Create an instance of this class, launching the Lab Recruits game as it does so. The game is assumed to 
-     * be installed in ProgramFiles (windows) or in Application (Mac). Linux: use the other constructor.
+     * Create an instance of this class, launching the Lab Recruits game as it does
+     * so. The game is assumed to be installed in ProgramFiles (windows) or in
+     * Application (Mac). Linux: use the other constructor.
      * 
-     * @param useGraphics if true, the game will be launched with graphics displayed, and else without graphics. Linux: graphics cannot be turned on.
+     * @param useGraphics if true, the game will be launched with graphics
+     *                    displayed, and else without graphics. Linux: graphics
+     *                    cannot be turned on.
      */
     public LabRecruitsTestServer(Boolean useGraphics) {
         start(useGraphics, Platform.INSTALL_PATH);
     }
 
     /**
-     * Create an instance of this class, launching the Lab Recruits game as it does so. The given path
-     * is the path to the Lab Recruits executable.
+     * Create an instance of this class, launching the Lab Recruits game as it does
+     * so. The given path is the path to the Lab Recruits executable.
      * 
-     * @param useGraphics if true, the game will be launched with graphics displayed, and else without graphics. Linux: graphics cannot be turned on.
+     * @param useGraphics if true, the game will be launched with graphics
+     *                    displayed, and else without graphics. Linux: graphics
+     *                    cannot be turned on.
      */
     public LabRecruitsTestServer(Boolean useGraphics, String binaryPath) {
         start(useGraphics, binaryPath);
     }
-    
+
     /**
      * Launch the Lab Recruits game.
      */
     private void start(Boolean useGraphics, String binaryPath) {
         // try to start the server
 
-        if(Platform.isLinux())
+        if (Platform.isLinux())
             useGraphics = false;
 
         Util.verifyPath(binaryPath);
 
         if (server != null && server.isAlive())
-            throw new IllegalCallerException("The current server is still running. Close the server first by calling Close();");
+            throw new IllegalCallerException(
+                    "The current server is still running. Close the server first by calling Close();");
 
         try {
-            ProcessBuilder pb = new ProcessBuilder(useGraphics ?
-                    new String[]{binaryPath} :
-                    new String[]{binaryPath, "-batchmode", "-nographics"});
+            ProcessBuilder pb = new ProcessBuilder(useGraphics ? new String[] { binaryPath }
+                    : new String[] { binaryPath, "-batchmode", "-nographics" });
 
             pb.redirectOutput(ProcessBuilder.Redirect.DISCARD);
             pb.redirectError(ProcessBuilder.Redirect.INHERIT);
@@ -79,8 +85,9 @@ public class LabRecruitsTestServer {
      * Return from method when the game has loaded
      */
     public void waitForGameToLoad() {
-        if(server == null)
-            throw new IllegalCallerException("Cannot wait for game to load, because the server is has not started yet!");
+        if (server == null)
+            throw new IllegalCallerException(
+                    "Cannot wait for game to load, because the server is has not started yet!");
         if (!server.isAlive())
             throw new IllegalCallerException("Cannot wait for game to load, because, the server already closed down!");
 
@@ -88,14 +95,14 @@ public class LabRecruitsTestServer {
         new LabRecruitsEnvironment();
     }
 
-    /** 
+    /**
      * Close the game-instance by destroying the process that contains it.
      */
     public void close() {
-        if (server != null){
+        if (server != null) {
 
             try {
-                //server.waitFor();
+                // server.waitFor();
                 server.destroy();
                 server.waitFor();
             } catch (InterruptedException e) {
@@ -105,8 +112,8 @@ public class LabRecruitsTestServer {
     }
 
     /**
-     *  Check whether the game is alive. This does not actually check that, but rather only
-     *  check if the process that contains the game is alive.
+     * Check whether the game is alive. This does not actually check that, but
+     * rather only check if the process that contains the game is alive.
      */
     public boolean isRunning() {
         if (server == null)
@@ -115,7 +122,7 @@ public class LabRecruitsTestServer {
     }
 
     // wait for a certain condition
-    private void waitFor(Function<Process, Boolean> eval){
+    private void waitFor(Function<Process, Boolean> eval) {
         try {
             while (!eval.apply(server))
                 server.waitFor(10, TimeUnit.MILLISECONDS);

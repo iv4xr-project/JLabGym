@@ -7,26 +7,24 @@ at Utrecht University within the Software and Game project course.
 
 package environments;
 
-import eu.iv4xr.framework.spatial.Vec3 ;
+import eu.iv4xr.framework.spatial.Vec3;
 import helperclasses.LegacyTuple;
 
 /**
- * Part of the wrapper class to wrap commands sent to Lab Recruits. See also the class
- * Request.
- * WP: This is a bit legacy, let's not change this.
+ * Part of the wrapper class to wrap commands sent to Lab Recruits. See also the
+ * class Request. WP: This is a bit legacy, let's not change this.
  * 
  * 
- * The AgentRequest class is a Request that always returns an observation of the gym.
+ * The AgentRequest class is a Request that always returns an observation of the
+ * gym.
+ * 
  * @author Maurin
  */
 public class AgentCommand {
-	
-	public enum AgentCommandType
-	{
-	    DONOTHING,
-	    MOVETOWARD,
-	    INTERACT
-	}
+
+    public enum AgentCommandType {
+        DONOTHING, MOVETOWARD, INTERACT
+    }
 
     public AgentCommandType cmd;
     public String agentId;
@@ -62,8 +60,9 @@ public class AgentCommand {
      * Moves an agent towards the given location.
      */
     public static AgentCommand moveTowardCommand(String agent, Vec3 targetLocation, boolean jump) {
-    	// use LegacyTuple here. Dont cange it to e.g. Pair, as the serialization expect specific
-    	// field-names:
+        // use LegacyTuple here. Dont cange it to e.g. Pair, as the serialization expect
+        // specific
+        // field-names:
         return new AgentCommand(agent, agent, AgentCommandType.MOVETOWARD, new LegacyTuple<>(targetLocation, jump));
     }
 

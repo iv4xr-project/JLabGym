@@ -10,8 +10,8 @@ import java.util.Arrays;
 
 /**
  * This defines some configuration parameters for the Lab-Recruits game, as far
- * as they can be configured. This configuration will be sent to the Lab Recruits
- * when we connect iv4xr Environment to it.
+ * as they can be configured. This configuration will be sent to the Lab Recruits game
+ * when we "connect" an instance of {@link LabRecruitsEnvironment} to the game.
  */
 public class LabRecruitsConfig {
 

@@ -11,7 +11,7 @@ import java.net.SocketException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import logger.PrintColor;
+import helperclasses.PrintColor;
 
 /**
  * Provide a reader/writer to a socket to communicate with the system under test.

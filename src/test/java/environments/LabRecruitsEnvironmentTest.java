@@ -9,7 +9,6 @@ package environments;
 
 import org.junit.jupiter.api.Test;
 
-import agents.TestSettings;
 import eu.iv4xr.framework.spatial.Vec3;
 import game.LabRecruitsTestServer;
 import game.Platform;
@@ -33,7 +32,7 @@ public class LabRecruitsEnvironmentTest {
     @BeforeEach
     void start() {
     	// set this to true to make the game's graphic visible:
-    	var useGraphics = true ;
+    	var useGraphics = false ;
     	SocketReaderWriter.debug = true ;
     	String labRecruitesExeRootDir = System.getProperty("user.dir") ;
     	labRecruitsTestServer =new LabRecruitsTestServer(
@@ -63,6 +62,8 @@ public class LabRecruitsEnvironmentTest {
     	
     	var environment = new LabRecruitsEnvironment(new LabRecruitsConfig("minimal"));
     	
+        // hit_RETURN() ;      
+    	
     	assertTrue(environment != null) ;
     	assertTrue(environment.worldNavigableMesh != null) ;
     	assertTrue(environment.worldNavigableMesh.faces.size() > 0 ) ;
@@ -70,11 +71,6 @@ public class LabRecruitsEnvironmentTest {
     	
     	System.out.println(environment.worldNavigableMesh) ;
     	
-        System.out.println("Hit RETURN to continue.") ;
-        new Scanner(System.in) . nextLine() ;
-    	
-    	//System.out.println("You can drag then game window elsewhere for beter viewing. Then hit RETURN to continue.") ;
-		//new Scanner(System.in) . nextLine() ;
     }
     
     @Test

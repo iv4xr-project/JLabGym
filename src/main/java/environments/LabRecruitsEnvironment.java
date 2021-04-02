@@ -7,17 +7,21 @@ at Utrecht University within the Software and Game project course.
 
 package environments;
 
-import logger.PrintColor;
 import nl.uu.cs.aplib.utils.Pair;
 import eu.iv4xr.framework.exception.Iv4xrError;
 import eu.iv4xr.framework.mainConcepts.W3DEnvironment;
 import eu.iv4xr.framework.spatial.Vec3;
+import helperclasses.PrintColor;
 import world.LabRecruitsRawNavMesh;
 import world.LabWorldModel;
 import world.Observation;
 
 import java.io.*;
 
+/**
+ * This "Environment" provides methods to control and get observations from a running
+ * instance of the Lab Recruits game.
+ */
 public class LabRecruitsEnvironment extends W3DEnvironment {
 
 	private LabRecruitsConfig gameconfig ;
@@ -48,10 +52,19 @@ public class LabRecruitsEnvironment extends W3DEnvironment {
     	loadWorld() ;
     }
 
+    /**
+     * Return the Lab Recruits game-configuration used by this environment.
+     */
     public LabRecruitsConfig gameConfig() {
     	return gameconfig ;
     }
 
+    /**
+     * Instruct the Lab Recruits game to load the level as specified in link gameConfig().
+     * After the level is loaded, the game will send back the navigation-mesh of the level.
+     * This will be stored in the field worldNavigableMesh. This mesh is static (does not
+     * change).
+     */
     @Override
     public void loadWorld() {
 		var rawmesh = (LabRecruitsRawNavMesh) sendCommand(null,null,LOADWORLD_CMDNAME,null,LabRecruitsRawNavMesh.class) ;
@@ -60,16 +73,36 @@ public class LabRecruitsEnvironment extends W3DEnvironment {
 		worldNavigableMesh = rawmesh.covertToMesh() ;
 	}
 
+    /**
+     * Return what the specified agent currently observes. This is represented as a WorldModel
+     * structure. E.g. this information includes the agent's own position amd health, 
+     * game objects it sees, their positions, and their properties.
+     */
     @Override
     public LabWorldModel observe(String agentId) {
 		return (LabWorldModel) super.observe(agentId) ;
 	}
 
+    /**
+     * Will move the specified agent towards the given target location. This does not
+     * necessarily bring the agent to that destination location. The agent will move
+     * in that direction, as far as its speed. The default speed is 0.13. Furthermore,
+     * this allows there is no obstacle obstructs the movement.
+     * 
+     * The method also requires the agent's current position to be passed.
+     */
     @Override
     public LabWorldModel moveToward(String agentId, Vec3 agentLocation, Vec3 targetLocation) {
     	return (LabWorldModel) super.moveToward(agentId, agentLocation, targetLocation) ;
     }
 
+    /**
+     * This causes the agent to interacts with a game-object specified by its id. Note
+     * that to interact, the agent needs to be close enough (<= 1.5) to the target of 
+     * the interaction.
+     * 
+     * @param targetLocation is ignored.
+     */
     @Override
     public LabWorldModel interact(String agentId, String targetId, String interactionType) {
 		return (LabWorldModel) sendCommand(agentId, targetId, INTERACT_CMDNAME, null, null);
@@ -77,7 +110,7 @@ public class LabRecruitsEnvironment extends W3DEnvironment {
 
 
 	// place holder for debugging ... to be removed later
-	public Observation obs ;
+	Observation obs ;
 
     /**
      * @param cmd representing the command to send to the real environment.
@@ -160,6 +193,8 @@ public class LabRecruitsEnvironment extends W3DEnvironment {
      * Currently broken :| TODO.
      */
     public Boolean updateHazards(){
+        throw new UnsupportedOperationException() ;
+        /*
     	try {
            return sendPackage(Request.updateEnvironment());
     	}
@@ -168,6 +203,7 @@ public class LabRecruitsEnvironment extends W3DEnvironment {
             System.out.println(String.format("%s: Sending an update-environment command fails.", PrintColor.FAILURE()));
             return false;
         }
+        */
     }
 
 

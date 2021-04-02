@@ -8,8 +8,9 @@ at Utrecht University within the Software and Game project course.
 package game;
 
 import environments.LabRecruitsEnvironment;
+import helperclasses.PrintColor;
 import helperclasses.Util;
-import logger.PrintColor;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;

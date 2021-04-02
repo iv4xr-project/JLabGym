@@ -33,6 +33,12 @@ For Mac: put `LabRecruits.app` in `gym/Mac/bin`. For Windows: put the files incl
 * `./gym` contains the binary of the _Lab Recruits_ game (macos and windows).
 * `./src/test/resources/levels` contain sample level definitions for _Lab Recruits_.
 
+### Copyright and License
+
+Copyright (c) 2021, Utrecht University (Department of Information and
+Computing Sciences).
+
+License: GNU LGPL.
 
 ### Contributors
 

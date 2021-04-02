@@ -21,8 +21,8 @@ public class LabRecruitsConfigTest {
     @Test
     public void JsonTest(){
         LabRecruitsConfig config  = new LabRecruitsConfig("minimal")
-                . removeSwitchToDoorLinks(new Pair<>("button1", "door1"))
-                . replaceSeed(52572723);
+                . removeSwitchToDoorLinks(new Pair<>("button1", "door1")) ;
+        config.seed = 52572723 ;
 
         //GymEnvironment env = new GymEnvironment(config);
         

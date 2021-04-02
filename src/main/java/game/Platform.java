@@ -7,8 +7,8 @@ at Utrecht University within the Software and Game project course.
 
 package game;
 
+import helperclasses.PrintColor;
 import helperclasses.Util;
-import logger.PrintColor;
 
 import java.nio.file.Paths;
 

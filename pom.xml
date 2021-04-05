@@ -68,7 +68,12 @@
             <artifactId>commons-io</artifactId>
             <version>1.3.2</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/info.picocli/picocli -->
+        <dependency>
+           <groupId>info.picocli</groupId>
+           <artifactId>picocli</artifactId>
+           <version>4.6.1</version>
+        </dependency>
         <!-- dependencies on iv4xr Agent Framework -->
         <!--  for remote repo:
         <dependency>

@@ -20,7 +20,7 @@ The game requires a game-level to be loaded. `JLabGym` contains some test-levels
 
 After you build Lab Recruits and put its executable in a place where `JLabGym` can find it (as explained above), now you are ready to use `JLabGym`. Below is a simple example showing how to control Lab Recruits from `JLabGym`. The full example can be found in the class [`Example1`](./src/main/java/examples/Example1.java).
 
-##### 1. Let's start with what you need to import:
+#### 1. Let's start with what you need to import:
 
 ```java
 // From JLabGym:
@@ -34,7 +34,7 @@ import world.LabEntity;
 // From the iv4XR package that JLabGym uses:
 import eu.iv4xr.framework.spatial.Vec3;
 ```
-##### 2. Launch Lab Recruits from Java
+#### 2. Launch Lab Recruits from Java
 
 Locate first the parent directory where your Lab Recruits executable is place. When you built it, Unity will typically place the produced executable in a structure like this:
 
@@ -56,7 +56,7 @@ LabRecruitsTestServer labRecruitsBinding = new LabRecruitsTestServer(
 labRecruitsBinding.waitForGameToLoad();
 ```
 
-##### 3. Load a level and create an instance of `LabRecruitsEnvironment`
+#### 3. Load a level and create an instance of [`LabRecruitsEnvironment`](./src/main/java/environments/LabRecruitsEnvironment.java).
 
 This environment will bind itself to the running instance of Lab Recruits (that you just launched above). Once you have this environment, you can use it to control Lab Recruits.
 
@@ -93,7 +93,7 @@ System.out.println("Position of button1:" + q) ;
 System.out.println("The button is turned-on:" + isOn) ;
 ```
 
-**Moving the agent.** Below we show how you can move the agent towards a certain destination. You can do this by invoking the method `move(p1,p2)` from the environment; `p1` is the agent current position, and `p2` is the destination. This will move the agent in a straight line towards `p2`. Note that the agent is bounded by its movement speed, so it cannot reach `p2` in a single `move` if `p2` is far. Also, `move` assumes that the line segment it tries to move the agent is free from obstacle. For example, the agent cannot move through a wall.
+**Moving the agent.** Below we show how you can move the agent towards a certain destination. You can do this by invoking the method `moveToward(p1,p2)` from the environment; `p1` is the agent current position, and `p2` is the destination. This will move the agent in a straight line towards `p2`. Note that the agent is bounded by its movement speed, so it cannot reach `p2` in a single `moveToward` if `p2` is far. Also, `moveToward` assumes that the line segment it tries to move the agent is free from obstacle. For example, the agent cannot move through a wall.
 
 ```java
 Vec3 destination = new Vec3(1.5f,0,4f) // (x,y,z) position with y on the vertical axis.
@@ -122,7 +122,7 @@ System.out.println("" + stateAfter) // true
 
 ### Other documentations
 
-* World model and entity state
+* [Controlling and observing Lab Recruits](./docs/ControlAndObservation.md)
 * Navigation mesh
 
 

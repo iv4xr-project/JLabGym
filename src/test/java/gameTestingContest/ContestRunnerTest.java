@@ -1,16 +1,16 @@
 package gameTestingContest;
 
 
-import static Examples.Example1.*;
+import static examples.Example1.*;
 import static org.junit.jupiter.api.Assertions.* ;
 
 import java.util.*;
 
 import org.junit.jupiter.api.Test;
 
-import Examples.Example1;
 import environments.LabRecruitsEnvironment;
 import eu.iv4xr.framework.spatial.Vec3;
+import examples.Example1;
 import game.Platform;
 import helperclasses.Util;
 import nl.uu.cs.aplib.utils.Pair;

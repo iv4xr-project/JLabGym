@@ -75,7 +75,7 @@ public class ContestRunner implements Callable<Integer> {
      */
     @Override
     public Integer call() throws Exception { 
-        out.println("** JLabGym Testing-AI Contest. ") ;
+        out.println("** START JLabGym Testing-AI Contest. ") ;
         out.println("** Time-stamp        : " + java.time.LocalDate.now() + ", " + java.time.LocalTime.now()) ;
         out.println("** LR executable root: " + labRecruitesExeRootDir) ;
         out.println("** Levels dir        : " + levelsDir) ;
@@ -144,6 +144,7 @@ public class ContestRunner implements Callable<Integer> {
             environment.close() ;
             LRbinding.close() ;
         }
+        out.println("** END. Return-code: " + returnCode) ;
         return returnCode ;
     }
     
@@ -162,7 +163,6 @@ public class ContestRunner implements Callable<Integer> {
     
     public static void main(String[] args) throws Exception {
         int exitCode = new CommandLine(new ContestRunner()).execute(args);
-        System.exit(exitCode); 
     }
 
 }

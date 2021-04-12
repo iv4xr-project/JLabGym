@@ -1,14 +1,20 @@
 # <img src="./docs/iv4xr_logo_1200dpi.png" width="20%"> <img src="./docs/logo.png" width="8%"> JLabGym
 
-This package/project `JLabGym` provides a Java-based environment that will allow you to use the game [Lab Recruits](https://github.com/iv4xr-project/labrecruits) as an 'AI Gym'. An _AI Gym_ is an environment where you can try out your AI, or whatever algorithm X, to perform a certain task in the environment. JLabGym provides a set of methods to control the Lab Recruits game and to obtain its internal state information. The Lab Recruits game itself also allows you to design your own game-level through a simple CSV file, and hence you can design your own specific level layout, puzzles, hazards, and goals that your AI can try.
+This package/project `JLabGym` provides a Java-based environment that will allow you to use the game [Lab Recruits](https://github.com/iv4xr-project/labrecruits) as an 'AI Gym'. An _AI Gym_ is an environment where you can try out your AI, or whatever algorithm X, to perform some tasks in the environment. JLabGym provides a set of methods to control the Lab Recruits game and to obtain its internal state information. The Lab Recruits game itself  allows you to design your own game-level through a simple CSV file, and hence you can design your own specific level layouts, puzzles, hazards, and goals/tasks that your AI can try.
 
 <img src="./docs/LRSS1.png" width="48%"><img src="./docs/LRSS3.png" width="50%">
 
-With JLabGym you can programmatically control the player characters in Lab Recruits:
+With JLabGym you can programmatically control the player characters in Lab Recruits.
 
 <img src="./docs/pc.png" width="10%">
 
-You can instruct it to give you what it observes, to move, or to interact with a certain in-game entity.
+You can instruct a controlled character to report back to you what it observes, to move, or to interact with a certain in-game entity.
+
+### The Lab Recruits Game
+
+The game allows you to load a game-level and play it. It is a single player game, but you can control multiple player-characters. A game level can be setup to contain one or more goal-flags that you have to reach to earn points. However, these are typically placed in rooms with closed doors. To open a door you have to find a matching button and toggle it. Oh, some parts of building might be burning with fire. Avoid fire if you can, as it hurts you.  For more on how to play the game and how to make your own level, see [the game's site](https://github.com/iv4xr-project/labrecruits).
+
+JLabGym allows to to programmatically control player-characters.
 
 ### Before Using JLabGym
 
@@ -18,7 +24,7 @@ The game requires a game-level to be loaded. `JLabGym` contains some test-levels
 
 ### Using JLabGym
 
-After you build Lab Recruits and put its executable in a place where `JLabGym` can find it (as explained above), now you are ready to use `JLabGym`. Below is a simple example showing how to control Lab Recruits from `JLabGym`. The full example can be found in the class [`Example1`](./src/main/java/examples/Example1.java).
+After you build Lab Recruits, now you are ready to use `JLabGym`. Below is a simple example showing how to control Lab Recruits from `JLabGym`. The full example can be found in the class [`Example1`](./src/main/java/examples/Example1.java).
 
 #### 1. Let's start with what you need to import:
 
@@ -36,7 +42,7 @@ import eu.iv4xr.framework.spatial.Vec3;
 ```
 #### 2. Launch Lab Recruits from Java
 
-Locate first the parent directory where your Lab Recruits executable is place. When you built it, Unity will typically place the produced executable in a structure like this:
+Locate first the parent directory where your Lab Recruits executable is placed. When you built it, Unity will typically place the produced executable in a structure like this:
 
 ```
 (some executable root)
@@ -55,6 +61,7 @@ LabRecruitsTestServer labRecruitsBinding = new LabRecruitsTestServer(
       Platform.PathToLabRecruitsExecutable(labRecruitesExeRootDir));
 labRecruitsBinding.waitForGameToLoad();
 ```
+
 
 #### 3. Load a level and create an instance of [`LabRecruitsEnvironment`](./src/main/java/environments/LabRecruitsEnvironment.java).
 

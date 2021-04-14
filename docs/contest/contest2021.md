@@ -6,6 +6,8 @@ The goal of this contest is to come up with the best algorithm to automatically 
 
 The game allows you to load a game-level and play it. It is a single player game, but you can control multiple player-characters :running: :running: (though in this contest the setup will be single-character). A game level can be setup to contain one or more goal-flags that you have to reach to earn points. However, these are typically placed in rooms with closed doors. To open a door you have to find a matching button and toggle it. Oh, some parts of building might be burning with fire :fire::fire:. Avoid fire if you can, as it hurts you.  
 
+<img src="../LRSS1.png" width="30%"> <img src="../LRSS3.png" width="30%">
+
 ##### Level correctness
 
 Although Lab Recruits allows you to define a game-level through a CSV file, for this competition we will pretend that your test algorithm has no knowledge of this CSV file. After all, in practice real game levels are typically hand crafted rather than generated from a CSV file. An important part of the correctness of a Lab Recruits game-level is the connection between the buttons and doors. If some buttons turn out to open the wrong doors, the level might become too easy to solve, or worse, it might become unplayable.

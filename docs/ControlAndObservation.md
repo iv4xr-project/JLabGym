@@ -1,9 +1,14 @@
 # Controlling and Observing Lab Recruits
 
-This document explains JLabGym's APIs and relevant data structures to control the Lab Recruits game, and to observe its state.
+This document explains JLabGym's APIs and relevant data structures to control the Lab Recruits game, and to observe its state. There are three main classes you need to know:
 
+* the class `LabRecruitsEnvironment` provides the API to control and observe Lab Recruits.
+* the class `LabWorldModel` represents the state of of Lab Recruits.
+* the class `LabEntity` represents the state of an in-game entity.
 
-### Control
+---
+### `LabRecruitsEnvironment`
+---
 
 To control a running instance of Lab Recruits you need an instance of [`LabRecruitsEnvironment`](./src/main/java/environments/LabRecruitsEnvironment.java). See [README.md](./README.md) for an example of how to create it and how to bind it to a running Lab Recruits.
 
@@ -54,8 +59,12 @@ The following methods/APIs are available to control and observe the Lab Recruits
 
    Not an instruction for Lab Recruits. This is to close `env` if you don't need it anymore. Among other things, this will close the TCP socket it uses to communicate with Lab Recruits. To also close the instance of Lab Recruits, see the example in [README.md](./README.md).  
 
+---
+### `LabWorldModel`
+---
 
-### World Object Model: structural represention of what an agent sees.
+An instance of this class is a structural represention of the Lab Recruits' state, to the extent of
+what an agent can see.
 
 Recall that the methods `observe()` and `interact()` of the class [`LabRecruitsEnvironment`](./src/main/java/environments/LabRecruitsEnvironment.java) return what your agent currently sees. In the code snippet below, `wom1` contains what the agent sees before the interaction with a button, and `wom2` contains what it observes after the interaction.
 
@@ -92,8 +101,11 @@ A WOM of _Lab Recruits_ has the following fields:
     This array describes the fragment of the world that the agent current see.
     You do not actually get a set of physical 3D points which are currently visible. This set is infinitely large; we can't construct it. Instead, the information is provided abstractly (so, there is some loss in information) as a graph of connected triangles, that together describe areas of the world that are _walkable_ by the agent, and are currently _visible_ to it. More about this is explained here: [Navigation in the world of Lab Recruits](.....)
 
+---
+### `LabEntity`
+---
 
-### Obtaining information on game-entities' properties
+An instance of this class represents the state/properties of an in-game entity.
 
 Recall that when you ask for an observation (e.g. through `env.observe()`), the World Model that you obtain also contains the field `elements` containing all the in-game objects/entities that the agent currently see.
 

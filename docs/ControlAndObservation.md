@@ -10,7 +10,7 @@ This document explains JLabGym's APIs and relevant data structures to control th
 ### `LabRecruitsEnvironment`
 ---
 
-To control a running instance of Lab Recruits you need an instance of [`LabRecruitsEnvironment`](./src/main/java/environments/LabRecruitsEnvironment.java). See [README.md](./README.md) for an example of how to create it and how to bind it to a running Lab Recruits.
+To control a running instance of Lab Recruits you need an instance of [`LabRecruitsEnvironment`](../src/main/java/environments/LabRecruitsEnvironment.java). See [README.md](./README.md) for an example of how to create it and how to bind it to a running Lab Recruits.
 
 The following methods/APIs are available to control and observe the Lab Recruits' instance to which your `LabRecruitsEnvironment`; let `env` be this instance:
 

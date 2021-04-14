@@ -1,6 +1,6 @@
 package gameTestingContest;
 
-import java.util.List;
+import java.util.*;
 
 import environments.LabRecruitsEnvironment;
 import nl.uu.cs.aplib.utils.Pair;
@@ -65,7 +65,7 @@ public class MyTestingAI {
      *         unconnected.
      * 
      */
-    public List<Pair<String, String>> checkLRLogic(LabRecruitsEnvironment environment) throws Exception {
+    public Set<Pair<String, String>> exploreLRLogic(LabRecruitsEnvironment environment) throws Exception {
         throw new UnsupportedOperationException();
     }
 

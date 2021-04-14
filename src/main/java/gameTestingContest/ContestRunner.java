@@ -97,7 +97,7 @@ public class ContestRunner implements Callable<Integer> {
             long startTime = System.currentTimeMillis() ;
             MyTestingAI myTestingAI = mkAnInstanceOfMyTestingAI.get() ;
             try {
-                List<Pair<String,String>> report = myTestingAI.checkLRLogic(environment) ;
+                Set<Pair<String,String>> report = myTestingAI.exploreLRLogic(environment) ;
                 long endTime = System.currentTimeMillis() ;
                 long runTime = endTime - startTime ;
                 // write the report to a file:

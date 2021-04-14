@@ -8,7 +8,7 @@ JLabGym provides something called _navigation mesh_ that you can use for guiding
 ### Navigation Mesh
 ---
 
-Recall that the class [`LabRecruitsEnvironment`](./src/main/java/environments/LabRecruitsEnvironment.java) provides you with the APIs to control and observe the Lab Recruits game. Here is again a snippet to launch Lab Recruits, load a game-level, and create an instance of `LabRecruitsEnvironment` that would bind to that running instance of Lab Recruits:
+Recall that the class [`LabRecruitsEnvironment`](../src/main/java/environments/LabRecruitsEnvironment.java) provides you with the APIs to control and observe the Lab Recruits game. Here is again a snippet to launch Lab Recruits, load a game-level, and create an instance of `LabRecruitsEnvironment` that would bind to that running instance of Lab Recruits:
 
 ```java
 String labRecruitesExeRootDir = ... ;
@@ -22,7 +22,7 @@ var config = new LabRecruitsConfig("moveToButton", \\ the name of the level to l
 var environment = new LabRecruitsEnvironment(config);
 ```
 
-As you create an instance of `LabRecruitsEnvironment` like this, it will also ask to the running Lab Recruits to send back so-called _navigation mesh_ of the game-level that you load onto it. In the above snippet, we load a level called _moveToButton_ (you can fine the level definition in `src/test/java/resources/levels/moveToButton.csv`). So the game will send back the navigation mesh of this level.
+As you create an instance of `LabRecruitsEnvironment` like this, it will also ask to the running Lab Recruits to send back so-called _navigation mesh_ of the game-level that you load onto it. In the above snippet, we load a level called _moveToButton_ (you can fine the level definition in [`src/test/java/resources/levels/moveToButton.csv`](../src/test/java/resources/levels/moveToButton.csv)). So the game will send back the navigation mesh of this level.
 
 A navigation mesh is a data structure that describes the areas of the game that is walkable :walking: by a player character (agent). For example, an agent can walk on the floor surface of the loaded game-level, but not through walls. So, the navigation mesh would cover, in principle, the floor surface, and exclude the walls.
 

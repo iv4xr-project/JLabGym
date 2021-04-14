@@ -10,13 +10,13 @@ This document explains JLabGym's APIs and relevant data structures to control th
 ### `LabRecruitsEnvironment`
 ---
 
-To control a running instance of Lab Recruits you need an instance of [`LabRecruitsEnvironment`](../src/main/java/environments/LabRecruitsEnvironment.java). See [README.md](./README.md) for an example of how to create it and how to bind it to a running Lab Recruits.
+To control a running instance of Lab Recruits you need an instance of [`LabRecruitsEnvironment`](../src/main/java/environments/LabRecruitsEnvironment.java). See [README.md](../README.md) for an example of how to create it and how to bind it to a running Lab Recruits.
 
 The following methods/APIs are available to control and observe the Lab Recruits' instance to which your `LabRecruitsEnvironment`; let `env` be this instance:
 
 1. `LabWorldModel env.observe(String agentId)`
 
-   :eyes: This returns information on what the player character currently sees. The observation is given as an instance of [`LabWorldModel`](./src/main/java/world/LabWorldModel.java).
+   :eyes: This returns information on what the player character currently sees. The observation is given as an instance of [`LabWorldModel`](../src/main/java/world/LabWorldModel.java).
 
    :id: The method requires a so-called _agentId_. When a game-level is loaded into Lab Recruits, typically the level will have one or more 'player characters' :running::walking: that the human player can control. Only one human player can play the game at the same time, but the human can switch between different characters (if there are more than one). These player-characters can also be controlled programatically from JLabGym. Each of those characters is identified by its _id_, which is what we mean by _agentId_ we mentioned above.
 
@@ -57,7 +57,7 @@ The following methods/APIs are available to control and observe the Lab Recruits
 
 1. `env.close()`.
 
-   Not an instruction for Lab Recruits. This is to close `env` if you don't need it anymore. Among other things, this will close the TCP socket it uses to communicate with Lab Recruits. To also close the instance of Lab Recruits, see the example in [README.md](./README.md).  
+   Not an instruction for Lab Recruits. This is to close `env` if you don't need it anymore. Among other things, this will close the TCP socket it uses to communicate with Lab Recruits. To also close the instance of Lab Recruits, see the example in [README.md](../README.md).  
 
 ---
 ### `LabWorldModel`
@@ -66,7 +66,7 @@ The following methods/APIs are available to control and observe the Lab Recruits
 An instance of this class is a structural represention of the Lab Recruits' state, to the extent of
 what an agent can see.
 
-Recall that the methods `observe()` and `interact()` of the class [`LabRecruitsEnvironment`](./src/main/java/environments/LabRecruitsEnvironment.java) return what your agent currently sees. In the code snippet below, `wom1` contains what the agent sees before the interaction with a button, and `wom2` contains what it observes after the interaction.
+Recall that the methods `observe()` and `interact()` of the class [`LabRecruitsEnvironment`](../src/main/java/environments/LabRecruitsEnvironment.java) return what your agent currently sees. In the code snippet below, `wom1` contains what the agent sees before the interaction with a button, and `wom2` contains what it observes after the interaction.
 
 ```java
 // let environment be your instance of LabRecruitsEnvironment that binds
@@ -75,7 +75,7 @@ LabWorldModel wom1 = environment.observe(agentId) ;
 LabWorldModel wom2 = environment.interact(agentId,buttonId,"");
 ```
 
-Observation is captured as an instance of the class [`LabWorldModel`](./src/main/java/world/LabWorldModel.java), which in turn is a subclass of [`WorldModel`](https://github.com/iv4xr-project/aplib/blob/master/src/main/java/eu/iv4xr/framework/mainConcepts/WorldModel.java). An instances of `WorldModel` is also called _World Object Model_ (WOM) as it **structurally** describes what the game-world looks like from the agent's eye (as opposed to representing observation by images) .
+Observation is captured as an instance of the class [`LabWorldModel`](../src/main/java/world/LabWorldModel.java), which in turn is a subclass of [`WorldModel`](https://github.com/iv4xr-project/aplib/blob/master/src/main/java/eu/iv4xr/framework/mainConcepts/WorldModel.java). An instances of `WorldModel` is also called _World Object Model_ (WOM) as it **structurally** describes what the game-world looks like from the agent's eye (as opposed to representing observation by images) .
 
 A WOM of _Lab Recruits_ has the following fields:
 
@@ -94,7 +94,7 @@ A WOM of _Lab Recruits_ has the following fields:
 
 1. `Map<String, WorldEntity> elements`
 
-   This a collection of _in-game entities_ that the agent currently sees. The collection is represented as a a mapping from entity-id to the corresponding entity. The type of the entity is actually [`LabEntity`](./src/main/java/world/LabEntity.java) which is a subclass of [`WorldEntity`](https://github.com/iv4xr-project/aplib/blob/master/src/main/java/eu/iv4xr/framework/mainConcepts/WorldEntity.java).
+   This a collection of _in-game entities_ that the agent currently sees. The collection is represented as a a mapping from entity-id to the corresponding entity. The type of the entity is actually [`LabEntity`](../src/main/java/world/LabEntity.java) which is a subclass of [`WorldEntity`](https://github.com/iv4xr-project/aplib/blob/master/src/main/java/eu/iv4xr/framework/mainConcepts/WorldEntity.java).
 
    Use the method `wom.getElement(id)` to obtain the element with the specified id. It returns null if an entity with that id cannot be found in `elements`. Below we will explain how to know the id of an entity.
 
@@ -111,7 +111,7 @@ An instance of this class represents the state/properties of an in-game entity.
 
 Recall that when you ask for an observation (e.g. through `env.observe()`), the World Model that you obtain also contains the field `elements` containing all the in-game objects/entities that the agent currently see.
 
-An in-game entity is represented by an instance of [`LabEntity`](./src/main/java/world/LabEntity.java) which in turn is a subclass of  [`WorldEntity`](https://github.com/iv4xr-project/aplib/blob/master/src/main/java/eu/iv4xr/framework/mainConcepts/WorldEntity.java). This structure contains information on the agent's properties/state. The following fields/getters are available:
+An in-game entity is represented by an instance of [`LabEntity`](../src/main/java/world/LabEntity.java) which in turn is a subclass of  [`WorldEntity`](https://github.com/iv4xr-project/aplib/blob/master/src/main/java/eu/iv4xr/framework/mainConcepts/WorldEntity.java). This structure contains information on the agent's properties/state. The following fields/getters are available:
 
 1. `String id`: an _id_ that uniquely identify the entity.
 

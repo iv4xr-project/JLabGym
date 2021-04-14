@@ -4,6 +4,7 @@ package gameTestingContest;
 import static examples.Example1.*;
 import static org.junit.jupiter.api.Assertions.* ;
 
+import java.io.File;
 import java.util.*;
 
 import org.junit.jupiter.api.Test;
@@ -24,14 +25,14 @@ public class ContestRunnerTest {
         
         // a mock-AI, just for testing.
         @Override
-        public List<Pair<String, String>> checkLRLogic(LabRecruitsEnvironment environment) throws Exception {
+        public Set<Pair<String, String>> exploreLRLogic(LabRecruitsEnvironment environment) throws Exception {
             int i = 0 ;
             i = Example1.guide(environment,i,new Vec3(1.5f,0,4f)) ;
             i = Example1.guide(environment,i,new Vec3(5,0,4f)) ;
             i = Example1.guide(environment,i,new Vec3(5,0,1.8f)) ;
             
             // producing a mock report:
-            List<Pair<String, String>> report = new LinkedList<>() ;
+            Set<Pair<String, String>> report = new HashSet<>() ;
             report.add(new Pair("button0","door0")) ; // just a pretend ... there is no door in the given level.
             return report ;
         }
@@ -43,7 +44,14 @@ public class ContestRunnerTest {
      * file.
      */
     @Test
-    public void test1() throws Exception {
+    public void test_ContestRunner() throws Exception {
+        
+        String reportFile = System.getProperty("user.home") + "/tmp/report_moveToButton.csv" ;
+        // delete the report file if it exists:
+        if (Util.fileExists(reportFile))  {
+            new File(reportFile) .delete() ;
+        }
+ 
         
         // override the MyAI factory to use the above "xxxAI" :
         ContestRunner.mkAnInstanceOfMyTestingAI = () -> new XXXtestAI() ;
@@ -58,7 +66,17 @@ public class ContestRunnerTest {
         }
         catch(Error e) { }
         // test if the report file is indeed created:
-       assertTrue(Util.fileExists(System.getProperty("user.home") + "/tmp/report_moveToButton.csv")) ;
+       assertTrue(Util.fileExists(reportFile)) ;
+    }
+    
+    @Test
+    public void test_RawContestRunner() throws Exception {
+        RawContestRunner.labRecruitesExeRootDir = System.getProperty("user.dir") ;
+        RawContestRunner.levelName = "moveToButton" ;
+        RawContestRunner.levelsDir = Platform.LEVEL_PATH ;
+        RawContestRunner.mkAnInstanceOfMyTestingAI = () -> new XXXtestAI() ;
+        RawContestRunner.main(null);
+        // no oracle... just checking that this does not crash        
     }
 
 }

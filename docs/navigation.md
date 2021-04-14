@@ -8,7 +8,7 @@ JLabGym provides something called _navigation mesh_ that you can use for guiding
 ### Navigation Mesh
 ---
 
-Recall that the class `LabRecruitsEnvironment` provides you with the APIs to control and observe the Lab Recruits game. Here is again a snippet to launch Lab Recruits, load a game-level, and create an instance of `LabRecruitsEnvironment` that would bind to that running instance of Lab Recruits:
+Recall that the class [`LabRecruitsEnvironment`](./src/main/java/environments/LabRecruitsEnvironment.java) provides you with the APIs to control and observe the Lab Recruits game. Here is again a snippet to launch Lab Recruits, load a game-level, and create an instance of `LabRecruitsEnvironment` that would bind to that running instance of Lab Recruits:
 
 ```java
 String labRecruitesExeRootDir = ... ;
@@ -38,17 +38,17 @@ Note that just because an area is walkable does not mean that it is also reachab
 
 Now, when two triangles in the navigation mesh are _connected_ (they have a common edge), such as triangles A and B in the above example, it means: (a) the areas of both are walkable, and (b) they are reachable from one another; that is, it is possible for the agent to walk from one area to another without bumping into a wall or other (static) obstacles. By traveling from one triangle to a neighboring triangle, you can now in principle plan a path that would guide your agen, for example, to travel from triangle A to triangle C in the above example.
 
-This navigation mesh is available in the field `worldNavigableMesh` of your instance of `LabRecruitsEnvironment`. So, if `env` is your instance of `LabRecruitsEnvironment`, then `env.worldNavigableMesh` contains this navigation mesh. The information from the mesh can be inquired as follows. Let `mesh` be the value of `env.worldNavigableMesh`. This value is of type `eu.iv4xr.framework.spatial.meshes.Mesh`.
+This navigation mesh is available in the field `worldNavigableMesh` of your instance of `LabRecruitsEnvironment`. So, if `env` is your instance of `LabRecruitsEnvironment`, then `env.worldNavigableMesh` contains this navigation mesh. The information from the mesh can be inquired as follows. Let `mesh` be the value of `env.worldNavigableMesh`. This value is of type [`Mesh`](https://github.com/iv4xr-project/aplib/blob/master/src/main/java/eu/iv4xr/framework/spatial/meshes/Mesh.java).
 
 1. `ArrayList<Vec3> mesh.vertices` contains the 3D coordinates/locations of all the corners of the triangles in the mesh. Rather than calling them 'corners' we will call them _nodes_.
 
-1. `ArrayList<Edge> mesh.edges` is the set of all edges/lines between the nodes. If `e` is an edge, it connects the nodes `e.i` and `e.j`.
+1. `ArrayList<Edge> mesh.edges` is the set of all edges/lines between the nodes. If `e` is an [`Edge`](https://github.com/iv4xr-project/aplib/blob/master/src/main/java/eu/iv4xr/framework/spatial/meshes/Edge.java), it connects the nodes `e.i` and `e.j`.
 
   However `e.i` and `e.j` are not 3D coordinates. Rather, they are indices of `mesh.vertices`. So, if you want to know which 3D locations are connected by `e`, they are `mesh.vertices.get(e.i)` and `mesh.vertices.get(e.j)`.
 
   Lines between two nodes are guaranteed to be walkable and free of (static) obstacles such as walls. Do keep in mind that a dynamic obstacle such as a door (that can open or close at the runtime) can still block the line.
 
-1. `ArrayList<Face> faces` is the set of triangles in the mesh. Each triangle `f` in this set has a field `f.vertices` that contains the corners of the triangles. `f.vertices` is however not literally a set of 3D locations. Instead it is an array of integers, each is an index in  `mesh.vertices`, from where you can obtain its 3D location.
+1. `ArrayList<Face> faces` is the set of triangles in the mesh. Each [`Face`](https://github.com/iv4xr-project/aplib/blob/master/src/main/java/eu/iv4xr/framework/spatial/meshes/Face.java) `f` in this set represents a triangle; it has a field `f.vertices` that contains the corners of the triangles. `f.vertices` is however not literally a set of 3D locations. Instead it is an array of integers, each is an index in  `mesh.vertices`, from where you can obtain its 3D location.
 
 Note that `mesh.edges` is actually sufficient for you to guide the agent to go from one node to another.
 

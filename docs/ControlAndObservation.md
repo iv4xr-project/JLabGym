@@ -16,7 +16,7 @@ The following methods/APIs are available to control and observe the Lab Recruits
 
 1. `LabWorldModel env.observe(String agentId)`
 
-   :eyes: This returns information on what the player character currently sees. The observation is given as an instance of `LabWorldModel`.
+   :eyes: This returns information on what the player character currently sees. The observation is given as an instance of [`LabWorldModel`](./src/main/java/world/LabWorldModel.java).
 
    :id: The method requires a so-called _agentId_. When a game-level is loaded into Lab Recruits, typically the level will have one or more 'player characters' :running::walking: that the human player can control. Only one human player can play the game at the same time, but the human can switch between different characters (if there are more than one). These player-characters can also be controlled programatically from JLabGym. Each of those characters is identified by its _id_, which is what we mean by _agentId_ we mentioned above.
 
@@ -75,7 +75,7 @@ LabWorldModel wom1 = environment.observe(agentId) ;
 LabWorldModel wom2 = environment.interact(agentId,buttonId,"");
 ```
 
-Observation is captured as an instance of the class `LabWorldModel`, which in turn is a subclass of `eu.iv4xr.framework.world.WorldModel`. An instances of `WorldModel` is also called _World Object Model_ (WOM) as it **structurally** describes what the game-world looks like from the agent's eye (as opposed to representing observation by images) .
+Observation is captured as an instance of the class [`LabWorldModel`](./src/main/java/world/LabWorldModel.java), which in turn is a subclass of [`WorldModel`](https://github.com/iv4xr-project/aplib/blob/master/src/main/java/eu/iv4xr/framework/mainConcepts/WorldModel.java). An instances of `WorldModel` is also called _World Object Model_ (WOM) as it **structurally** describes what the game-world looks like from the agent's eye (as opposed to representing observation by images) .
 
 A WOM of _Lab Recruits_ has the following fields:
 
@@ -83,6 +83,8 @@ A WOM of _Lab Recruits_ has the following fields:
 1. `String agentId`: the agent's _id_.
 
 1. `Vec3 position`: the agent's current _position_ (its center point position). You can also use `wom.getFloorPosition()` to get the agent's position when projected to the floor it is on.
+
+  Definition of `Vec3`: [here](https://github.com/iv4xr-project/aplib/blob/master/src/main/java/eu/iv4xr/framework/spatial/Vec3.java).
 
 1. `Vec3 extent` describes the agent's dimension. It is a tuple (a,b,c) of non-negative values. It means that agent's width, length, and height are respectively 2a, 2b, and 2c.
 
@@ -92,14 +94,14 @@ A WOM of _Lab Recruits_ has the following fields:
 
 1. `Map<String, WorldEntity> elements`
 
-   This a collection of _in-game entities_ that the agent currently sees. The collection is represented as a a mapping from entity-id to the corresponding entity. The type of the entity is actually `LabEntity` which is a subclass of `WorldEntity`.
+   This a collection of _in-game entities_ that the agent currently sees. The collection is represented as a a mapping from entity-id to the corresponding entity. The type of the entity is actually [`LabEntity`](./src/main/java/world/LabEntity.java) which is a subclass of [`WorldEntity`](https://github.com/iv4xr-project/aplib/blob/master/src/main/java/eu/iv4xr/framework/mainConcepts/WorldEntity.java).
 
    Use the method `wom.getElement(id)` to obtain the element with the specified id. It returns null if an entity with that id cannot be found in `elements`. Below we will explain how to know the id of an entity.
 
 1. `int[] visibleNavigationNodes`
 
     This array describes the fragment of the world that the agent current see.
-    You do not actually get a set of physical 3D points which are currently visible. This set is infinitely large; we can't construct it. Instead, the information is provided abstractly (so, there is some loss in information) as a graph of connected triangles, that together describe areas of the world that are _walkable_ by the agent, and are currently _visible_ to it. More about this is explained here: [Navigation in the world of Lab Recruits](.....)
+    You do not actually get a set of physical 3D points which are currently visible. This set is infinitely large; we can't construct it. Instead, the information is provided abstractly (so, there is some loss in information) as a graph of connected triangles, that together describe areas of the world that are _walkable_ by the agent, and are currently _visible_ to it. More about this is explained here: [Navigation in the Lab Recruits' World](./navigation.md).
 
 ---
 ### `LabEntity`
@@ -109,7 +111,7 @@ An instance of this class represents the state/properties of an in-game entity.
 
 Recall that when you ask for an observation (e.g. through `env.observe()`), the World Model that you obtain also contains the field `elements` containing all the in-game objects/entities that the agent currently see.
 
-An in-game entity is represented by an instance of `LabEntity` which in turn is a subclass of  `eu.iv4xr.framework.world.WorldEntity`. This structure contains information on the agent's properties/state. The following fields/getters are available:
+An in-game entity is represented by an instance of [`LabEntity`](./src/main/java/world/LabEntity.java) which in turn is a subclass of  [`WorldEntity`](https://github.com/iv4xr-project/aplib/blob/master/src/main/java/eu/iv4xr/framework/mainConcepts/WorldEntity.java). This structure contains information on the agent's properties/state. The following fields/getters are available:
 
 1. `String id`: an _id_ that uniquely identify the entity.
 

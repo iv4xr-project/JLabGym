@@ -6,10 +6,7 @@ This package/project `JLabGym` provides a Java-based environment that will allow
 
 With JLabGym you can programmatically control the player characters in Lab Recruits.
 
-<img src="./docs/pc.jpg" width="20%">
-<img src="./docs/pc.jpg" width="15%">
-<img src="./docs/pc.jpg" width="10%">
-<img src="./docs/pc.jpg" width="5%">
+<img src="./docs/pc.jpg" width="20%"><img src="./docs/pc.jpg" width="15%"><img src="./docs/pc.jpg" width="10%"><img src="./docs/pc.jpg" width="5%">
 
 You can instruct a controlled character to report back to you what it observes, to move, or to interact with a certain in-game entity.
 

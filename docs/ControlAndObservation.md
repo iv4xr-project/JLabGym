@@ -16,15 +16,15 @@ The following methods/APIs are available to control and observe the Lab Recruits
 
 1. `LabWorldModel env.observe(String agentId)`
 
-   This returns information on what the player character currently sees. The observation is given as an instance of `LabWorldModel`.
+   :eyes: This returns information on what the player character currently sees. The observation is given as an instance of `LabWorldModel`.
 
-   The method requires a so-called _agentId_. When a game-level is loaded into Lab Recruits, typically the level will have one or more 'player characters' that the human player can control. Only one human player can play the game at the same time, but the human can switch between different characters (if there are more than one). These player-characters can also be controlled programatically from JLabGym. Each of those characters is identified by its _id_, which is what we mean by _agentId_ we mentioned above.
+   :id: The method requires a so-called _agentId_. When a game-level is loaded into Lab Recruits, typically the level will have one or more 'player characters' :running::walking: that the human player can control. Only one human player can play the game at the same time, but the human can switch between different characters (if there are more than one). These player-characters can also be controlled programatically from JLabGym. Each of those characters is identified by its _id_, which is what we mean by _agentId_ we mentioned above.
 
    This id can be found in the level-definition file of the game-level that you loaded into Lab Recruits.
 
 1. `env.moveToward(String agentId, Vec3 agentLocation, Vec3 destination)`
 
-   This will move the agent specified by the given id, in a straight line towards the given destination. This will move the agent as far as its speed allows (by default 0.13 distance unit). This distance should be obstacle free (the agent cannot move through obstacles like walls). To cover a greater distance you will have to invoke `moveToward` multiple times.
+   :running: This will move the agent specified by the given id, in a straight line towards the given destination. This will move the agent as far as its speed allows (by default 0.13 distance unit). This distance should be obstacle free (the agent cannot move through obstacles like walls). To cover a greater distance you will have to invoke `moveToward` multiple times.
 
    Note that this method requires the agent's current position, which you can obtain e.g. as follows:
 
@@ -47,7 +47,7 @@ The following methods/APIs are available to control and observe the Lab Recruits
 
 1. `LabWorldModel env.interact(String agentId, String targetId, String interactionType)`
 
-   This returns an instance of `LabWorldModel`. The `targetId` is the id of the entity that you want to interact with. Only buttons are interactable in Lab Recuits, so this must be the id of some button. Again, this can be found in the level file of the game level that you loaded into Lab Recruits.
+   :red_circle: This returns an instance of `LabWorldModel`. The `targetId` is the id of the entity that you want to interact with. Only buttons are interactable in Lab Recuits, so this must be the id of some button. Again, this can be found in the level file of the game level that you loaded into Lab Recruits.
 
   The parameter `interactionType` is ignored.
 

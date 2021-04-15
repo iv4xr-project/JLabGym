@@ -73,6 +73,10 @@ You are free to extend the project, but do not change the signature of any of th
 
 **Levels to try**: you can find a set of levels you can use to test your algorithm, in `src/test.resources/levels/contest`.
 
+#### APIs and other information
+  * [APIs: controlling and observing Lab Recruits](../ControlAndObservation.md)
+  * [Navigating in the game-world](../navigation.md)
+  * [More information about JLabGym](https://github.com/iv4xr-project/JLabGym)
 
 ---
 ### Submission

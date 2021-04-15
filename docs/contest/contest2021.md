@@ -64,7 +64,7 @@ public class MyTestingAI {
 }
 ```
 
-The method is expected to explore the currently loaded Lab Recruits level to report back the connections between the buttons and doors in that level. The method should return this finding as a set of pairs _(b,d)_ of button-id and door-id that your algorithm thinks to be connected.
+The method is expected to explore the currently loaded Lab Recruits level to report back the connections between the buttons and doors in that level. The method should return this finding as a set of pairs _(b,d)_ of button-id and door-id that your algorithm thinks to be connected. As you can see above, the method receives an `environment`; this will provides the APIs that will let you to programatically control Lab Recruits.
 **Note:** you algorithm should not try to exploit the information in the level definition files; this will defeat the purpose of  this Contest.
 
 You are free to extend the project, but do not change the signature of any of the classes in the package `gameTestingContest`. Also, keep it as a Java and Maven project. Make sure that we (the Contest organizer) can easily and smoothly build your JLabGym project.

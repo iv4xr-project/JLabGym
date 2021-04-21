@@ -22,7 +22,7 @@ JLabGym allows to to programmatically control player-characters.
 
   The game requires a game-level to be loaded. `JLabGym` contains some test-levels you can try, here: [`src/test/resources/levels`](./src/test/resources/levels). You can for example try to play (as a human) the `buttons_doors_1.csv` level. The game is not set to have a particular goal (there is no end boss) other than to collect points (and staying alive). However, you can simulate an end goal (or goals) by placing goal flags in your level definition. See the  [site of Lab Recruits](https://github.com/iv4xr-project/labrecruits), it has a wiki explaining the control to play the game as a human, and also a part that explains how to construct your own level with a csv file.
 
-1. You also need the [iv4XR Framework](https://github.com/iv4xr-project/aplib). Get it from Github. It is a Maven project, so building it should be straight forward.
+1. You also need [iv4XR Framework](https://github.com/iv4xr-project/aplib). Get it from Github. It is a Maven project, so building it should be straight forward.
 
 ### Using JLabGym
 

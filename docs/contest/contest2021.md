@@ -40,10 +40,6 @@ After reporting the findings, your algorithm indeed still does not know if the l
 
 It is important that your algorithm is sound and complete. It is _complete_ if it does not miss any connection. It is _sound_ if it does not report a connection that is actually not there.
 
-##### Scoring
-
-Based on how sound and complete your algorithm is, and its time performance.
-
 ---
 ### Implementation
 ---
@@ -70,12 +66,14 @@ You are free to extend the project, but do not change the signature of any of th
 
 **Testing your algorithm**: you can run it from the main method of the class [`gameTestingContest.RawContestRunner`](../../src/main/java/gameTestingContest/RawContestRunner.java). You need to configure several things first, like the location of the Lab Recruits executable and the name of the level to load. See the documentation in the source code of `RawContestRunner`.
 
-**Levels to try**: you can find a set of levels you can use to test your algorithm, in `src/test.resources/levels/contest`.
+**Levels to try**: you can find a set of levels you can use to test your algorithm, in `src/test/resources/levels/contest`. Do keep in mind that your solution should be generic enough to handle an arbitrary Lab Recruits level. Some scoping conditions will be mentioned in the "Scoring" section below.
+
 
 #### APIs and other information
   * [APIs: controlling and observing Lab Recruits](../ControlAndObservation.md)
   * [Navigating in the game-world](../navigation.md)
   * [More information about JLabGym](https://github.com/iv4xr-project/JLabGym)
+  * [More on the sample levels](./samples.md)
 
 ---
 ### Submission
@@ -84,3 +82,35 @@ You are free to extend the project, but do not change the signature of any of th
 Send us a zip containing you JLabGym (maven) project. Don't include binaries in the zip.
 
 During the evaluation we will benchmark your MyTestingAI against a series of game-level. The scoring will be based on the soundness and completeness of your algorithm, and its time performance.
+
+---
+### Scoring
+---
+
+Your submission will be benchmarked against one or more sets of levels. The benchmark sets are deliberately kept secret from you, but you can assume the following:
+
+* The levels will have only a single character/agent to control.
+* All levels only have a single floor (so, no multi-floor setup).
+* The difficulty level (see below) is at most 3.
+
+Your score is calculated as follows.
+
+* Your score on a given game-level is pair calculated as follows (**lower is better**):
+
+  > **score**(level) = (v,T), where v = (5 - diff)∗(FP + NP)
+
+  * _FP_: number of _false positives_. A false positive occurs when you report a link (b,d) to say that the button b can toggle the door d, but this link  does **not** actually exist.
+  * _NP_: number of _false negative_. A false negative occurs when there is an actual link (b,d), but your algorithm fails to report this.
+  * _T_: the run time of your algorithm until it returns (and thus delivering its findings/report). This is capped at _B∗D∗10_ seconds, where _B_ is the total number of buttons in the level, and _D_ the total number of doors.
+  * diff: the difficulty of the level (higher is more difficult):
+    > diff = **max**(α,β) + o
+
+    α is the maximum number of doors connected to the same button; β is the maximum number of buttons connected to the same door; o is 1 if some doors are initially open, else it is 0.
+
+* A benchmark os a set S of level. Your score on a given benchmark S is the sum of the scores of each level in S:
+
+  > **score**(S) = (V,T') where
+  > V = ∑{ v | lev in S, score(lev) = (v,T)}
+  > T' = ∑{ T | lev in S, score(lev) = (v,T)}
+
+* The scores of the contestants are then ranked lexicographically, in reverse order (so, smaller values are better). The submission with the smallest score wins.

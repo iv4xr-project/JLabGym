@@ -62,11 +62,18 @@ public class MyTestingAI {
 The method is expected to explore the currently loaded Lab Recruits level to report back the connections between the buttons and doors in that level. The method should return this finding as a set of pairs _(b,d)_ of button-id and door-id that your algorithm thinks to be connected. As you can see above, the method receives an `environment`; this will provides the APIs that will let you programatically control Lab Recruits.
 **Note:** you algorithm should not try to exploit the information in the level definition files; this will defeat the purpose of the Contest.
 
-You are free to extend the project, but do not change the signature of any of the classes in the package `gameTestingContest`. Also, keep it as a Java and Maven project. Make sure that we (the Contest organizer) can easily and smoothly build your JLabGym project.
+You are free to extend the project, but do not change the signature of any of the classes in the package `gameTestingContest`, and few other classes listed under 'Integrity Requirement' below. Also, keep it as a Java and Maven project. Make sure that we (the Contest organizer) can easily and smoothly maven-build your JLabGym project.
 
 **Testing your algorithm**: you can run it from the main method of the class [`gameTestingContest.RawContestRunner`](../../src/main/java/gameTestingContest/RawContestRunner.java). You need to configure several things first, like the location of the Lab Recruits executable and the name of the level to load. See the documentation in the source code of `RawContestRunner`.
 
 **Levels to try**: you can find a set of levels you can use to test your algorithm, in `src/test/resources/levels/contest`. Do keep in mind that your solution should be generic enough to handle an arbitrary Lab Recruits level. Some scoping conditions will be mentioned in the "Scoring" section below.
+
+**Contest Integrity Requirement**: to assure fair scoring, you should refrain from modifying the following classes:
+  * the class `gameTestingContes/ContestRunner.java`.
+  * all classes in under `/environments`.
+  * the class `helperclasses/CSVExport.java` and `helperclasses/Util.java`.
+
+If these files are changed, the benchmarking will not use them.  
 
 
 #### APIs and other information

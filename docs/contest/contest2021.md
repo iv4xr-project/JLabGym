@@ -86,7 +86,8 @@ If these files are changed, the benchmarking will not use them.
 ### Submission
 ---
 
-Send us a zip containing you JLabGym (maven) project. Don't include binaries in the zip.
+Upload a zip containing you JLabGym (maven) project; a url will be provided for this. Don't include binaries in the zip. The project should be a **maven project**; make sure that we will be able to build your
+project at our site.
 
 During the evaluation we will benchmark your MyTestingAI against a series of game-level. The scoring will be based on the soundness and completeness of your algorithm, and its time performance.
 

@@ -26,7 +26,7 @@ public class ContestRunner implements Callable<Integer> {
     // ===== this section specifies avaibale command-line options for this contest runner
     // =====
     @Option(names = "--ng", description = "Will surpress the game graphics.") 
-    boolean noGraphic ;
+    boolean noGraphic = false ;
     
     @Option(names = "--time",  
             description = "Alocated time budget to run (in seconds)")
@@ -68,6 +68,11 @@ public class ContestRunner implements Callable<Integer> {
      */
     public static PrintStream out = System.out ;
     
+    public static boolean DEBUG = true ;
+    public static void printDebugInfo(String str) {
+        if(DEBUG) out.println(">>> " + str) ;
+    }
+    
     // ========================================================================
     
     /**
@@ -95,6 +100,7 @@ public class ContestRunner implements Callable<Integer> {
         final Thread parentThread = Thread.currentThread() ;
         Thread aiThread = new Thread(() -> { 
             long startTime = System.currentTimeMillis() ;
+            printDebugInfo("Starting contestant AI.") ;
             MyTestingAI myTestingAI = mkAnInstanceOfMyTestingAI.get() ;
             try {
                 Set<Pair<String,String>> report = myTestingAI.exploreLRLogic(environment) ;
@@ -113,44 +119,49 @@ public class ContestRunner implements Callable<Integer> {
                         + "report_" + levelName + ".csv" ;
                 
                 CSVExport.exportToCSV(data,outputFile) ;
-                
                 aiThreadHasTerminatedNormally = true ;
+                printDebugInfo("Contestant's report is produced; its thread ends normally.") ;
             }
             catch(Exception e) {
-               out.println("## your instance of MyTestingAI crashed: " + e.getClass().getName()) ;
+               printDebugInfo("Contestant AI crashed or interrupted: " + e.getClass().getName()) ;
                e.printStackTrace(out) ;
                // the AI has crashed. Swallow the exception, but we don't set the 
                // successful-termination flag to true.
             }
             parentThread.interrupt() ;
         }) ;
-        aiThread.run(); 
-        int  returnCode = 0 ; // 0 means successful run of the AI, -1 means it fails or runs out of time
+        long contestantThreadStartTime = System.currentTimeMillis() ;
+        aiThread.start(); 
         try {
             // wait for the time budget
+            printDebugInfo("ContestRunner goes to sleep: " + timeBudget + "s") ;
             Thread.sleep(timeBudget * 1000);
-            // time budget is exhausted. Kill the AI-thread:
+            // time budget is exhausted. Interrupt the AI-thread:
+            printDebugInfo("TIMEOUT. ContestRunner will now interrupts the contestant thread, and then waits for 10s before killing it.") ;
             aiThread.interrupt();
             // give 10 secs for the AI-thread to cleanly finish, else kill it:
             Thread.sleep(10000) ;
             aiThread.stop();
-            returnCode = -1 ;
+            printDebugInfo("ContestRunner just force-killed the contestant thread.") ;
         }
         catch(InterruptedException e) {
             // well the AI-thread has interrupted the wait...
-            if (!aiThreadHasTerminatedNormally) returnCode = -1 ;
+            printDebugInfo("The contestant thread manages to stop itself.") ;
         }
         finally {
             environment.close() ;
             LRbinding.close() ;
         }
-        out.println("** END. Return-code: " + returnCode) ;
+        
+        int  returnCode = aiThreadHasTerminatedNormally ? 0 : -1 ;
+        long duration = System.currentTimeMillis() - contestantThreadStartTime ;
+        out.println("** END. Return-code: " + returnCode + ". Approximate contestant runtime: " + duration + " ms") ;
         return returnCode ;
     }
     
     
     LabRecruitsTestServer launchLabRecruits() {
-        var useGraphics = true ; // set this to false if you want to run the game without graphics
+        var useGraphics = !noGraphic ; 
         SocketReaderWriter.debug = false ; 
         LabRecruitsTestServer labRecruitsBinding =new LabRecruitsTestServer(
                 useGraphics,

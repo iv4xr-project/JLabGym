@@ -109,7 +109,7 @@ Your score is calculated as follows.
 
   * _FP_: number of _false positives_. A false positive occurs when you report a link (b,d) to say that the button b can toggle the door d, but this link  does **not** actually exist.
   * _NP_: number of _false negative_. A false negative occurs when there is an actual link (b,d), but your algorithm fails to report this.
-  * _T_: the run time of your algorithm until it returns (and thus delivering its findings/report). This is capped at _B∗D∗10_ seconds, where _B_ is the total number of buttons in the level, and _D_ the total number of doors.
+  * _T_: the run time of your algorithm until it returns (and thus delivering its findings/report). This is capped at Tmax = _B∗D∗10_ seconds, where _B_ is the total number of buttons in the level, and _D_ the total number of doors. This cap is enforced through interrupt. That is, our runner will interrupt the thread that runs your algorithm at time Tmax. After that your algorithm has 10s time to close gracefully, after which we will force the thread to stop. 
   * diff: the difficulty of the level (higher is more difficult):
     > diff = **max**(α,β) + o
 

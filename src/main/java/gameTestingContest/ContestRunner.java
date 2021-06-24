@@ -149,7 +149,14 @@ public class ContestRunner implements Callable<Integer> {
             printDebugInfo("The contestant thread manages to stop itself.") ;
         }
         finally {
-            environment.close() ;
+            // Env.close tries to neatly close the socket connections to LR, but it first send a "close" msg to LR.
+            // LR has an issue now, that we we send a command for a non-existing agent, it hangs. Consequently,
+            // close hangs too. 
+            // WORKAROUND: we don't close the env, but rather we just close LRbinding, which in turns will destroy
+            // the OS process on which LR was launched.
+            
+            // Work-around: not doing it:
+            // environment.close() ;
             LRbinding.close() ;
         }
         

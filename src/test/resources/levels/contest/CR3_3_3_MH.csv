@@ -5,7 +5,7 @@ button3,door3,,,,,,,,,,,
 button4,door1,,,,,,,,,,,
 button2,,,,,,,,,,,,
 |w,w,w,w,w,w,w,w,w,w,w,,
-w,f:dhf,f:a^agent1,f,f,w,f,f,w,f:b^button1,w,,
+w,f:dhf,f:a^agent0,f,f,w,f,f,w,f:b^button1,w,,
 w,f,w,w,f:b^button2,w,f,f:dhf,w,f,w,,
 w,f:dhf,f:dhf,f,f,f:dhf,f:dhf,f:dhf,w,f,w,w,w
 w,w,f:d>n^door1,w,w,w,f:dhf,f:dhf,f,f,f:d>e^door3,f:g^levelEnd,w

@@ -69,6 +69,7 @@ public class LabRecruitsRawNavMesh {
      * iv4xr agents.See {@link eu.iv4xr.framework.spatial.meshes.Mesh}.
      */
     public Mesh covertToMesh() {
+    	if (this.vertices == null) return new Mesh();
         if (!new QArrayList<Vec3>(this.vertices).isDistinct())
             throw new IllegalArgumentException("There are duplicates in the vertex array!");
 
